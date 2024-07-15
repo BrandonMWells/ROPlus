@@ -1,0 +1,36 @@
+﻿  grammar.c
+  libconfig.c
+  scanctx.c
+  scanner.c
+  strbuf.c
+  des.c
+  mutex.c
+  thread.c
+  account.c
+  HPMlogin.c
+  ipban.c
+  lclif.c
+  login.c
+  loginlog.c
+  conf.c
+  core.c
+  packets.c
+  console.c
+  db.c
+  ers.c
+  grfio.c
+  HPM.c
+  memmgr.c
+C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\src\common\grfio.c(520,23): warning C4244: 'function': conversion from 'int64' to 'long', possible loss of data
+  md5calc.c
+  nullpo.c
+  random.c
+  showmsg.c
+  socket.c
+  sql.c
+  strlib.c
+  sysinfo.c
+  timer.c
+  utils.c
+  mt19937ar.c
+  login-server.vcxproj -> C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\login-server.exe

@@ -1,0 +1,16 @@
+//=========================================================================
+//= Halter quest
+//================= Description ===========================================
+//= Quest for halter
+//================= Current Version =======================================
+//= 1.4a
+//=========================================================================
+
+morocc,48,328,1	script	RidingNPC	4_M_ORIENT02,{
+	mes "[Riding Guide]";
+	mes "There is nothing like the cool breeze when riding,";
+	next;
+	mes "[Riding Guide]";
+	mes "Oh.. What am I talking about?";
+	end;
+}

@@ -1,0 +1,246 @@
+//=========================================================================
+//= Halter quest - By Elith Ralin
+//================= Description ===========================================
+//= Quest for halter
+//================= Current Version =======================================
+//= 1.0a 
+//=========================================================================
+
+prontera,48,327,7	script	Riding Guide	4_M_ORIENT02,{
+	
+	if(riding_quest == 2)
+	{
+		mes "[Riding Guide]";
+		mes "Oh, you are back! I have some great news!";
+		close;
+		end;
+	}
+	
+	//Check if riding quest is 1 and then run additional check to see if player has cleared the quest
+	if(riding_quest == 1)
+	{
+		mes "[Riding Guide]";
+		mes "Did you get my paper stamped by all trainers?";
+		next;
+		if(RQ_Jag != 1)
+		{
+			mes "[Riding Guide]";
+			mes "Everything appears to be in order..";
+			next;
+			mes "[Riding Guide]";
+			mes "Check back with me tomorrow and I'll let you know if they association approves my request.";
+			//call close2 so the script closes but executes after teleporting
+			close2();
+			warp("prt_in",247,102);
+			set riding_quest, 2;
+			end;
+			
+		}
+		else
+		{
+			mes "[Riding Guide]";
+			mes "you can get the papers stamped in the surrounding cities, check your map to confirm them all.";
+			mes " ";
+			mes "There should be 5 in total, you'll be able to identify them as they always have animals near them.";
+			next;
+			mes "[Riding Guide]";
+			mes "Come back to me when its finished";
+			close;
+			end;
+			
+		}
+		
+		
+	}
+	mes "[Riding Guide]";
+	mes "There is nothing like the cool breeze when riding,";
+	next;
+	mes "[Riding Guide]";
+	mes "Oh.. sorry I was just thinking..";
+	next;
+	menu "What are you thinking about?",thinking,"Nevermind",cancel;
+
+		thinking:
+			mes "[Riding Guide]";
+			mes "How great it would be for others to feel the same joy of riding as me!";
+			next;
+			mes "[Riding Guide]";
+			mes "The problem is.. that only seasoned knight adventures are permitted to ride...";
+			next;
+			mes "[Riding Guide]";
+			mes "I have an idea though, this only applies to pecopeco's there are other ridable creatures out there!";
+			next;
+			menu "What do you want me to do?",accept,"Great.. I think I'll be going now.",qcancel;
+				accept:
+					mes "[Riding Guide]";
+					mes "I'm glad you asked..!  Take this!";
+					next;
+					mes "*The Riding Guide hands you a ^FF0000 pile of papers^000000 *";
+					next;
+					mes "[Riding Guide]";
+					mes "I need you to go visit each of the trainers in the major cities that surround prontera.";
+					next;
+					mes "[You]";
+					mes "What's in it for me?";
+					next;
+					mes "[Riding Guide]";
+					mes "If you can complete this task, it may be possible to register you as a legal rider! ";
+					next;
+					mes "[Riding Guide]";
+					mes "Now hurry!  There is no time to waste! ";
+					set riding_quest, 1;
+					set riding_quest_QP, 1;
+					close;
+					end;
+				qcancel	:
+					mes "[Riding Guide]";
+					mes "That is too bad...";
+					close;
+					end;
+				
+			
+			close;
+			end;
+
+		cancel:
+			mes "Aww, I'm sorry about that.";
+			close;
+			end;		
+	
+}
+
+morocc,168,30,2	script	Jaguar Trainer	99,{
+	mes "[Jaguar Trainer]";
+	mes "Hmm? What is it?";
+	
+	
+	if(riding_quest == 1 && RQ_Jag != 1)
+	{
+		next;
+		mes "[Jaguar Trainer]";
+		mes "You want me to sign this paper to allow people to ride jaguars?";
+		next;
+		mes "[Jaguar Trainer]";
+		mes "It's your funeral kid, it takes a lot of skill to ride an adult one.  Just look at the baby here! Hes ready to rip your head off.";
+		next;
+			mes "The trainer stamps the paper with his approval and hands it back to you.";
+		set RQ_Jag,1;
+		close();
+		end;
+		
+	}
+	close;
+	end;
+	
+	
+}
+
+geffen,196,107,2	script	Fox Trainer	123,{
+	mes "[Fox Trainer]";
+	mes "Hello there!";
+	
+	
+	if(riding_quest == 1 && RQ_Fox != 1)
+	{
+		next;
+		mes "[Fox Trainer]";
+		mes "You want me to sign this paper to allow people to ride Foxes?";
+		next;
+		mes "[Fox Trainer]";
+		mes "I would love to! please give my regards to the riding association";
+		next;
+			mes "The trainer stamps the paper with his approval and hands it back to you.";
+		set RQ_Fox,1;
+		close();
+		end;
+		
+	}
+	close;
+	end;
+	
+	
+}
+
+izlude,48,132,6	script	Lion Trainer	4_M_02,{
+	mes "[Lion Trainer?]";
+	mes "Everyone tells me this isn't a lion.. but it looks like a baby lion to me.";
+	
+	
+	if(riding_quest == 1 && RQ_Lion != 1)
+	{
+		next;
+		mes "[Lion Trainer?]";
+		mes "You want me to sign this paper to allow people to ride Lions?";
+		next;
+		mes "[Lion Trainer?]";
+		mes "Maybe you can talk some sense into these people, they insist that pecopeco's are the superior battle mount.";
+		next;
+			mes "The trainer stamps the paper with his approval and hands it back to you.";
+		set RQ_Lion,1;
+		close();
+		end;
+		
+	}
+	close;
+	end;
+	
+	
+}
+
+payon,190,129,4	script	Ostrich Trainer	4_F_04,{
+	mes "[Ostrich Trainer]";
+	mes "I'm raising this picky back to health, but I'm more used to raising ostriches!";
+	
+	
+	if(riding_quest == 1 && RQ_Ost != 1)
+	{
+		next;
+		mes "[Ostrich Trainer]";
+		mes "You want me to sign this paper to allow people to ride Ostriches?";
+		next;
+		mes "[Ostrich Trainer]";
+		mes "Sure, there is not many of them these days but maybe this will help them grow in population again.";
+		next;
+			mes "The trainer stamps the paper with his approval and hands it back to you.";
+		set RQ_Ost,1;
+		close();
+		end;
+		
+	}
+	close;
+	end;
+	
+	
+}
+
+payon,193,128,4	script	Picky	1049,{
+	mes "[Roween]";
+	mes " it's a tiny little picky!";
+	close;
+	end;
+}
+izlude,48,130,2	script	Roween	1782,{
+	mes "[Roween]";
+	mes " The Roween stands very tall looking curiously at evertything";
+	close;
+	end;
+}
+geffen,196,105,2	script	Nine tails	1180,{
+	mes "[Nine Tails]";
+	mes " The Nine Tail's just does not stop yapping.";
+	close;
+	end;
+}
+prontera,47,329,6	script	PecoPeco	428,{
+	mes "[PecoPeco]";
+	mes " The pecopeco stares at you with it's innocent dumb looking eyes";
+	close;
+	end;
+}
+
+morocc,167,29,2	script	Jaguar	2072,{
+	mes "[Jaguar]";
+	mes "The Jaguar appears to be held down by a spiked leash.";
+	close;
+	end;
+}
