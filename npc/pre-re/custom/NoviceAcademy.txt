@@ -1,0 +1,50 @@
+//Monster Tutor 
+new_1-1,60,144,10,10	monster	Poring	1002,9,30000,30000,0
+
+
+new_1-1,61,140,4	script	"Monster Tutor"	4_F_02,{
+	
+	if(MT_jellopy == 2){
+		
+		mes "[Monster tutor]";
+		mes "Move along now, you have a lot to learn.";
+		close;
+	
+	}	
+	if(MT_jellopy == 1){
+		
+		if(countitem(909) > 0){
+		mes "[Monster tutor]";
+		mes "Excellent, you are ready to move onto the next stage.";
+		next;
+		mes "[Monster tutor]";
+		mes "Go across the bridge and inside the building you will find more instructors.";
+		set MT_jellopy, 2;
+		close;
+		
+		}else{
+
+		mes "[Monster tutor]";
+		mes "Come back once you have a jellopy.";
+		close;
+		}
+	}
+		
+		mes "[Monster tutor]";
+		mes "Welcome, here you will learn about different monsters.";
+		next;
+		mes "[Monster tutor]";
+		mes "The world of midgard is full of a many variety of monsters, the ones roaming this island are known as poring.";
+		next;
+		mes "[Monster tutor]";
+		mes "Porings are plant type water monsters and are weak to wind element.";
+		next;
+		mes "[Monster tutor]";
+		mes "Survival will depend on you learning each monsters unique traits before engaging.";
+		next;
+		mes "[Monster tutor]";
+		mes "Now I would like you to bring me a^FF0000 jellopy ^000000 from a poring.";
+		set MT_jellopy,1;
+		close;
+		
+}
