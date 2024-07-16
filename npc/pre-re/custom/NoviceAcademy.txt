@@ -48,3 +48,18 @@ new_1-1,61,140,4	script	"Monster Tutor"	4_F_02,{
 		close;
 		
 }
+
+
+//warp <from map name>,<fromX>,<fromY>{,<facing>}%TAB%warp%TAB%<warp name>%TAB%<spanx>,<spany>,<to map name>,<toX>,<toY>
+
+//First door into the academy
+new_1-2,100,31,4	warp	n1	0,0,new_1-2,100,70
+new_1-2,99,68,4	warp	n2	0,0,new_1-2,100,27
+
+//outside of academy to hunting grounds
+new_1-2,23,191,4	warp	n3	0,0,new_1-3,96,21
+new_1-3,96,18,4	warp	n4	0,0,new_1-2,23,188
+
+//outside of academy to hunting grounds
+new_1-3,96,176,4	warp	n3	0,0,new_1-4,99,12
+new_1-4,99,8,4	warp	n4	0,0,new_1-3,96,173
