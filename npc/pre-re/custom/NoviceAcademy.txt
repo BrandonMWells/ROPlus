@@ -1,23 +1,93 @@
+////////////////////////////////////////////////////////
+//Novice Academy Script Ver 0.01A
+///////////////////////////////////////////////////////
+//ChangeLog: Consolidated Entry NPC script to Novice Academy script, 
+//           added tutorial variable to track progress.
+//
+//
+//
+//
+//
+//
+//
+alb_ship,84,99,5	script	Entry NPC	1_M_02,{
+	
+	//if user tutorial variable is anything higher than 0 don't allow the player to warp
+	if(tutorial > 0)
+	{
+		mes "[Entry NPC]";
+		mes "Sorry this ticket looks expired, I can't allow you on board.";
+		close;
+		end;
+	}
 
+	// if the user tutorial variable is 0 then this dialog begins.
+
+	mes "[Entry NPC]";
+	mes "Welcome to the world of Midgard!";
+	mes "Do you wish to enroll into the Novice Academy?";
+	if (select("Yes:No") == 1) {
+		mes "You have chosen to enroll in the academy.";
+		mes "You will now be teleported to the Novice Academy.";
+		next;
+		close2;
+		warp "new_1-1",53,111; // Coordinates for Novice Training Grounds
+		set tutorial,1;
+		end;
+	} else {
+		mes "You have chosen not to enroll.";
+		mes "Please select your starting city:";
+		switch (select("Prontera:Geffen:Morocc:Payon")) {
+			case 1:
+				mes "You will be teleported to Prontera.";
+				next;
+				close2;
+				warp "prontera",156,191; // Coordinates for Prontera
+				set tutorial,6;
+				end;
+			case 2:
+				mes "You will be teleported to Geffen.";
+				next;
+				close2;
+				warp "geffen",119,64; // Coordinates for Geffen
+				set tutorial,6;
+				end;
+			case 3:
+				mes "You will be teleported to Morocc.";
+				next;
+				close2;
+				warp "morocc",156,93; // Coordinates for Morocc
+				set tutorial,6;
+				end;
+			case 4:
+				mes "You will be teleported to Payon.";
+				next;
+				close2;
+				warp "payon",160,183; // Coordinates for Payon
+				set tutorial,6;
+				end;
+		}
+	}
+}
 
 new_1-1,61,140,4	script	"Monster Tutor"	4_F_02,{
 	
-	if(MT_jellopy == 2){
+	if(tutorial > 2){
 		
 		mes "[Monster tutor]";
-		mes "Move along now, you have a lot to learn.";
+		mes "Go across the bridge and inside the building you will find more instructors.";
 		close;
 	
 	}	
 	if(MT_jellopy == 1){
 		
-		if(countitem(909) > 0){
+		if(countitem(909)){
 		mes "[Monster tutor]";
 		mes "Excellent, you are ready to move onto the next stage.";
 		next;
 		mes "[Monster tutor]";
 		mes "Go across the bridge and inside the building you will find more instructors.";
-		set MT_jellopy, 2;
+		set tutorial, 3;
 		close;
 		
 		}else{
@@ -27,6 +97,13 @@ new_1-1,61,140,4	script	"Monster Tutor"	4_F_02,{
 		close;
 		}
 	}
+		if(tutorial <2){
+		mes "[Monster tutor]";
+		mes "What are you doing here..? Please go speak to the starting instructor south of here first..";
+		close;
+
+		}
+		if(tutorial == 2){
 		
 		mes "[Monster tutor]";
 		mes "Welcome, here you will learn about different monsters.";
@@ -43,6 +120,7 @@ new_1-1,61,140,4	script	"Monster Tutor"	4_F_02,{
 		mes "[Monster tutor]";
 		mes "Now I would like you to bring me a^FF0000 jellopy ^000000 from a poring.";
 		set MT_jellopy,1;
+		}
 		close;
 		
 }
@@ -147,12 +225,20 @@ new_1-2,41,166,3	script	Kafra Employee::kaf_novice	4_F_KAFRA3,{
 }
 
 new_1-1,53,114,4	script	Starting Instructor	4_F_JOB_HUNTER,{
+
+	if(tutorial >1)
+	{
+		mes "[Starting Instructor]";
+		mes "Now, please go to the Monster Tutor to learn about monsters.";
+		close;
+	}
 	// Check if the character has already received the items
 	if (C_starter_items_received) {
-		if (isequipped(1201) && isequipped(2101)) {
+		if (isequipped(13041) && isequipped(2101)) {
 			mes "[Starting Instructor]";
 			mes "Great! You have equipped the items.";
 			mes "Now, please go to the Monster Tutor to learn about monsters.";
+			set tutorial,2;
 			close;
 		} else {
 			mes "[Starting Instructor]";
@@ -170,9 +256,9 @@ new_1-1,53,114,4	script	Starting Instructor	4_F_JOB_HUNTER,{
 	// Giving the player money and items
 	mes "[Starting Instructor]";
 	mes "Here are your starting items:";
-	getitem 1201,1; // Knife
+	getitem 13041,1; // Novice Main Gauce
 	getitem 2101,1; // Guard
-	getitem 501,10; // Red Potion
+	getitem 569,100; // Novice Red Potion
 	Zeny += 250; // 250 Zeny
 	next;
 
