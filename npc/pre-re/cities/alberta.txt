@@ -53,3 +53,46 @@ alberta,248,89,4	duplicate(Turtle_Scholar_alberta)	Turtle Island Scholar	2_M_MOL
 
 //== quests/skills/merchant_skills.txt =====================
 alberta,232,106,6	duplicate(Gershaun_alberta)	Gershaun	1_M_LIBRARYMASTER
+
+alb_ship,84,99,5	script	Entry NPC	1_M_02,{
+	mes "[Entry NPC]";
+	mes "Welcome to the world of Ragnarok!";
+	mes "Do you wish to enroll into the adventure guild academy?";
+	if (select("Yes:No") == 1) {
+		mes "You have chosen to enroll in the academy.";
+		mes "You will now be teleported to the Novice Training Grounds.";
+		next;
+		close2;
+		warp "new_1-1",53,111; // Coordinates for Novice Training Grounds
+		end;
+	} else {
+		mes "You have chosen not to enroll.";
+		mes "Please select your starting city:";
+		switch (select("Prontera:Geffen:Morocc:Payon")) {
+			case 1:
+				mes "You will be teleported to Prontera.";
+				next;
+				close2;
+				warp "prontera",156,191; // Coordinates for Prontera
+				end;
+			case 2:
+				mes "You will be teleported to Geffen.";
+				next;
+				close2;
+				warp "geffen",119,64; // Coordinates for Geffen
+				end;
+			case 3:
+				mes "You will be teleported to Morocc.";
+				next;
+				close2;
+				warp "morocc",156,93; // Coordinates for Morocc
+				end;
+			case 4:
+				mes "You will be teleported to Payon.";
+				next;
+				close2;
+				warp "payon",160,183; // Coordinates for Payon
+				end;
+		}
+	}
+}
