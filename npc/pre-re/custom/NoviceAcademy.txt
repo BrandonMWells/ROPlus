@@ -145,3 +145,44 @@ new_1-2,41,166,3	script	Kafra Employee::kaf_novice	4_F_KAFRA3,{
 	savepoint "new_1-2",40,172;
 	callfunc "F_KafEnd",0,1,"at the Payon Dungeon";
 }
+
+new_1-1,53,114,4	script	Starting Instructor	4_F_JOB_HUNTER,{
+	// Check if the character has already received the items
+	if (C_starter_items_received) {
+		if (isequipped(1201) && isequipped(2101)) {
+			mes "[Starting Instructor]";
+			mes "Great! You have equipped the items.";
+			mes "Now, please go to the Monster Tutor to learn about monsters.";
+			close;
+		} else {
+			mes "[Starting Instructor]";
+			mes "It seems I have already given you the items.";
+			mes "Please equip them and talk to me again.";
+			close;
+		}
+	}
+
+	mes "[Starting Instructor]";
+	mes "Welcome to the world of Ragnarok!";
+	mes "I will give you some starting items and money.";
+	next;
+
+	// Giving the player money and items
+	mes "[Starting Instructor]";
+	mes "Here are your starting items:";
+	getitem 1201,1; // Knife
+	getitem 2101,1; // Guard
+	getitem 501,10; // Red Potion
+	Zeny += 250; // 250 Zeny
+	next;
+
+	// Set the flag to indicate the character has received the items
+	C_starter_items_received = 1;
+
+	mes "[Starting Instructor]";
+	mes "Please equip the items I have given you.";
+	next;
+	mes "[Starting Instructor]";
+	mes "Once you have equipped the items, talk to me again.";
+	close;
+}
