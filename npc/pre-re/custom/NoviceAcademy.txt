@@ -119,7 +119,7 @@ OnInit:
 	sellitem Goggle;
 }
 
-new_1-2,17,182,6	script	Antonio	4_M_ORIENT01,{
+new_1-2,17,182,6	script	Refiner	4_M_ORIENT01,{
 	callfunc "refinemain","Antonio",0;
 	end;
 }
@@ -132,7 +132,7 @@ OnInit:
 	sellitem 12324,-1;
 }
 
-new_1-2,41,166,3	script	Kafra Employee::kaf_payon3	4_F_KAFRA3,{
+new_1-2,41,166,3	script	Kafra Employee::kaf_novice	4_F_KAFRA3,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
 	mes "[Kafra Employee]";
