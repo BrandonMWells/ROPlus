@@ -32,6 +32,7 @@ alb_ship,84,99,5	script	Entry NPC	1_M_02,{
 		next;
 		close2;
 		warp "new_1-1",53,111; // Coordinates for Novice Training Grounds
+		savepoint "new_1-1",53,111;
 		set tutorial,1;
 		end;
 	} else {
@@ -43,6 +44,7 @@ alb_ship,84,99,5	script	Entry NPC	1_M_02,{
 				next;
 				close2;
 				warp "prontera",156,191; // Coordinates for Prontera
+				savepoint "prontera",156,191;
 				set tutorial,6;
 				end;
 			case 2:
@@ -271,4 +273,197 @@ new_1-1,53,114,4	script	Starting Instructor	4_F_JOB_HUNTER,{
 	mes "[Starting Instructor]";
 	mes "Once you have equipped the items, talk to me again.";
 	close;
+}
+
+
+new_1-2,116,115,4	script	Card Tutor	1_F_01,{
+
+	if(carded ==2)
+	{
+		switch(select("Can I buy another training card?","Nothing at all.")){
+			case 1:
+				goto tcardL;
+
+			case 2:
+				mes "[n/a]";
+				close;
+
+
+		}
+
+	}
+
+	if(carded == 1){
+
+		mes "[Card Tutor]";
+		mes "Have you done what I asked?";
+		switch(select("yes","no","buy another card","I lost my dagger")){
+
+		case 1: 
+			next;
+			mes "[Card Tutor]";
+
+				if(getequipcardcnt(4) > 0)
+				{
+					mes "[Card Tutor]";
+					mes "Looks like you managed to enchant your dagger";
+					next;
+					mes "[Card Tutor]";
+					mes " Keep in mind that different cards will enchant different pieces of equipment.";
+					next;
+					mes "[Card Tutor]";
+					mes "You have passed, go ahead and move along to the next tutor.";
+					set carded, 2;
+					close; 
+				}
+				else 
+				{
+					mes "[Card Tutor]";
+					mes "Be sure to equip it first if you have not a";
+					close; 
+
+				}
+
+
+
+			close;
+
+		case 2:
+			mes "[Card Tutor]";
+			mes "What are you waiting for?";
+			close;
+
+		case 3:
+			tcardL:
+			mes "[Card Tutor]";
+			mes "Sure that will be 250 Zeny";
+			switch(select("yes","no"))
+			{
+				case 1:
+				if(Zeny < 249)
+				{
+					mes "[Card Tutor]";
+					mes "You do not have enough Zeny.";
+					close;
+
+				}
+				else
+				{
+					mes "[Card tutor]";
+					mes "Here you go!";					
+					set Zeny,Zeny-250;
+					getitem 7466,1;
+					next;
+					close;
+
+
+				}
+
+				case 2:
+					mes "[Card Tutor]";
+					mes "Let me know if you change your mind.";
+					close;
+
+			}
+			close;
+
+		case 4:
+			mes "[Card Tutor]";
+			mes "You can get another one from the weapon vender in the room to our left, its not free though.";			
+
+		}
+	}
+
+
+	if(tutorial > 2){
+		mes "[Card Tutor]";
+		mes "Welcome, I'll be showing you how cards work";
+		next;
+		mes "[Card Tutor]";
+		mes "Cards are essentially the life essence in material form, we say cards but we speak figuratively.";
+		next;
+		mes "[Card Tutor]";
+		mes "You can imbue this life essence into your equipment to enhance the properites of said equipment.";
+		next;
+		mes "[Card Tutor]";
+		mes "Take this training card for example, place it into your dagger, If you lose the card you can just buy another one from me.";
+		getitem	7466,1; // Novice training Card
+		set carded,1;
+		close;
+	} else {
+
+		mes "[Card Tutor]";
+		mes "May I help you?";
+		close;
+
+	}
+
+}
+
+
+new_1-2,99,112,6	script	HatTutor	4_M_MANAGER,{
+
+
+    // Check if the player has completed the previous tutors
+    if (tutorial != 3) {
+		mes "[Hat Craft Tutor]";
+		mes "The world of midgard is home to some of the greatest inovation in fashion";
+		next; 
+		mes "[Hat Craft Tutor]";
+		mes "Did you miss a previous instruction, I do not see you on my registry...";
+		close;
+    }
+
+    // Check if the player has already crafted a hat
+    if (hatter == 1) {
+        mes "It seems you have already crafted a hat.";
+        close;
+    }
+
+    if (hatter == 0) {
+		mes "[Hat Craft Tutor]";
+        mes "Welcome to the Hat Crafting tutorial!";
+        mes "Today, we'll be crafting the Mr. Smiley mask.";
+        next;
+        mes "To craft the Mr. Smiley mask, you'll need the following items:";
+        mes "10 x Jellopy";
+        mes "10 x Fluff";
+        mes "10 x Clover";
+        next;
+        mes "Please bring me these items, and I'll help you craft the mask.";
+        set hatter, 2; // Set a temporary value to indicate the player has talked to the NPC but hasn't completed the task yet
+        close;
+	}
+
+    // If the player talks again without having the items
+    if (countitem(909) < 10 && countitem(914) < 10 && countitem(705) < 10) {
+        mes "You don't have all the required items.";
+        mes "Please gather the following items and come back:";
+        mes "10 x Jellopy";
+        mes "10 x Fluff";
+        mes "10 x Clover";
+        close;
+    }
+
+    // Craft the Mr. Smiley mask
+
+	if(checkweight(2278,1))
+	{
+    delitem 909, 10; // Jellopy
+    delitem 914, 10; // Fluff
+    delitem 705, 10; // Clover
+    getitem 2278, 1; // Mr. Smiley mask
+	mes "[Hat Craft Tutor]";
+    mes "Congratulations! You have crafted the Mr. Smiley mask.";
+    mes "This mask gives you +10 HP as an additional bonus.";
+
+    // Update the tutorial and hatter variables
+    set hatter, 1;
+	close;
+
+	}else{
+		mes "[Hat Craft Tutor]";
+    	mes "Check your weight before accepting the reward.";
+
+	}
 }

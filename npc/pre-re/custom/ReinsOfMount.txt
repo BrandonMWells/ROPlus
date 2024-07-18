@@ -109,7 +109,7 @@ prontera,48,327,7	script	Riding Guide	4_M_ORIENT02,{
 	
 }
 
-morocc,168,30,2	script	Jaguar Trainer	99,{
+morocc,168,30,2	script	Jaguar Trainer	4W_M_03,{
 	mes "[Jaguar Trainer]";
 	mes "Hmm? What is it?";
 	
@@ -135,7 +135,7 @@ morocc,168,30,2	script	Jaguar Trainer	99,{
 	
 }
 
-geffen,196,107,2	script	Fox Trainer	123,{
+geffen,196,107,2	script	Fox Trainer	2_F_MAGICMASTER,{
 	mes "[Fox Trainer]";
 	mes "Hello there!";
 	
@@ -213,32 +213,32 @@ payon,190,129,4	script	Ostrich Trainer	4_F_04,{
 	
 }
 
-payon,193,128,4	script	Picky	1049,{
+payon,193,128,4	script	Picky	PICKY,{
 	mes "[Roween]";
 	mes " it's a tiny little picky!";
 	close;
 	end;
 }
-izlude,48,130,2	script	Roween	1782,{
+izlude,48,130,2	script	Roween	ROWEEN,{
 	mes "[Roween]";
 	mes " The Roween stands very tall looking curiously at evertything";
 	close;
 	end;
 }
-geffen,196,105,2	script	Nine tails	1180,{
+geffen,196,105,2	script	Nine tails	NINE_TAIL,{
 	mes "[Nine Tails]";
 	mes " The Nine Tail's just does not stop yapping.";
 	close;
 	end;
 }
-prontera,47,329,6	script	PecoPeco	428,{
+prontera,47,329,6	script	PecoPeco	4_PECOPECO,{
 	mes "[PecoPeco]";
 	mes " The pecopeco stares at you with it's innocent dumb looking eyes";
 	close;
 	end;
 }
 
-morocc,167,29,2	script	Jaguar	2072,{
+morocc,167,29,2	script	Jaguar	JAGUAR,{
 	mes "[Jaguar]";
 	mes "The Jaguar appears to be held down by a spiked leash.";
 	close;
