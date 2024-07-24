@@ -21,7 +21,7 @@
   grfio.c
   HPM.c
   memmgr.c
-C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\src\common\grfio.c(520,23): warning C4244: 'function': conversion from 'int64' to 'long', possible loss of data
+H:\Ragnarok Online Plus\Ragnarok Online Plus\ROPlus\src\common\grfio.c(520,23): warning C4244: 'function': conversion from 'int64' to 'long', possible loss of data
   md5calc.c
   nullpo.c
   random.c
@@ -33,4 +33,4 @@ C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\src\common\grfio.c(520,2
   timer.c
   utils.c
   mt19937ar.c
-  login-server.vcxproj -> C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\login-server.exe
+  login-server.vcxproj -> H:\Ragnarok Online Plus\Ragnarok Online Plus\ROPlus\login-server.exe

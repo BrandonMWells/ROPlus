@@ -13,7 +13,7 @@
   des.c
   ers.c
   grfio.c
-C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\src\common\grfio.c(520,23): warning C4244: 'function': conversion from 'int64' to 'long', possible loss of data
+H:\Ragnarok Online Plus\Ragnarok Online Plus\ROPlus\src\common\grfio.c(520,23): warning C4244: 'function': conversion from 'int64' to 'long', possible loss of data
   HPM.c
   memmgr.c
   mapindex.c
@@ -53,4 +53,4 @@ C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\src\common\grfio.c(520,2
   mapif.c
   pincode.c
   Generating Code...
-  char-server.vcxproj -> C:\Users\bdonc\Desktop\junk\RO Devtools\Hercules-stable\char-server.exe
+  char-server.vcxproj -> H:\Ragnarok Online Plus\Ragnarok Online Plus\ROPlus\char-server.exe

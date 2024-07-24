@@ -194,10 +194,7 @@ new_1-2,116,115,4	script	Card Tutor	1_F_01,{
 				mes "[Card Tutor]";
 				mes "Go ahead and move along to the next tutor.";
 				close;
-
-
 		}
-
 	}
 
 	if(carded == 1){
@@ -282,7 +279,7 @@ new_1-2,116,115,4	script	Card Tutor	1_F_01,{
 	}
 
 
-	if(tutorial > 2){
+	if(tutorial == 4){
 		mes "[Card Tutor]";
 		mes "Welcome, I'll be showing you how cards work";
 		next;
@@ -312,23 +309,65 @@ new_1-2,116,115,4	script	Card Tutor	1_F_01,{
 ////////////////////////////////////////////////////////////////////////
 new_1-2,99,112,6	script	HatTutor	4_M_MANAGER,{
 
-
-    // Check if the player has completed the previous tutors
-    if (tutorial != 3) {
-
-		mes "[Hat Craft Tutor]";
-		mes "Did you miss a previous instruction, I do not see you on my registry...";
-		close;
-    }
-
-    // Check if the player has already crafted a hat
-    if (hatter == 1) {
+	// Check if the player has already crafted a hat
+    if (hat_t == 2) {
 		mes "[Hat Craft Tutor]";
 		mes "Move along to the other instructors, you have much to learn!";
         close;
     }
 
-    if (hatter == 0) {
+	// Player quest stage 1
+    if (hat_t == 1) {
+
+		// If the player talks again without having the items
+		if (countitem(909) < 10 && countitem(914) < 10 && countitem(705) < 10) {
+			mes "You don't have all the required items.";
+			mes "Please gather the following items and come back:";
+			mes "10 x Jellopy";
+			mes "10 x Fluff";
+			mes "10 x Clover";
+			close;
+		} else {
+
+		// Check the weight of the character and creaft mr.smiley
+		if(checkweight(2278,1)){
+
+			delitem 909, 10; // Jellopy
+			delitem 914, 10; // Fluff
+			delitem 705, 10; // Clover
+			getitem 2278, 1; // Mr. Smiley mask
+			set hat_t, 2; 
+			mes "[Hat Craft Tutor]";
+			mes "Congratulations! You have crafted the Mr. Smiley mask.";
+			next;
+			mes "[Hat Craft Tutor]";
+			mes "This mask gives you +10 HP as an additional bonus.";
+			next;
+			mes "[Hat Craft Tutor]";
+			mes "Move along to the other instructors, you have much to learn!";
+			close;
+
+			// update hat_tutorial variable
+
+			close;
+
+		} else {
+			mes "[Hat Craft Tutor]";
+			mes "Check your weight before accepting the reward.";
+			
+			}
+		}		
+	}
+
+	// Check if the player has completed the previous tutors
+    if (tutorial == 4) {
+
+		mes "[Hat Craft Tutor]";
+		mes "Did you miss a previous instruction, I do not see you on my registry...";
+		close;
+    }
+	else 
+	{
 		mes "[Hat Craft Tutor]";
 		mes "The world of midgard is home to some of the greatest inovation in fashion";
 		next; 
@@ -346,47 +385,11 @@ new_1-2,99,112,6	script	HatTutor	4_M_MANAGER,{
         mes "10 x Clover";
         next;
         mes "Please bring me these items, and I'll help you craft the mask.";
-        set hatter, 2; // Set a temporary value to indicate the player has talked to the NPC but hasn't completed the task yet
+		set hat_t,1;
         close;
+
 	}
 
-    // If the player talks again without having the items
-    if (countitem(909) < 10 && countitem(914) < 10 && countitem(705) < 10) {
-        mes "You don't have all the required items.";
-        mes "Please gather the following items and come back:";
-        mes "10 x Jellopy";
-        mes "10 x Fluff";
-        mes "10 x Clover";
-        close;
-    }
-
-    // Craft the Mr. Smiley mask
-
-	if(checkweight(2278,1))
-	{
-    delitem 909, 10; // Jellopy
-    delitem 914, 10; // Fluff
-    delitem 705, 10; // Clover
-    getitem 2278, 1; // Mr. Smiley mask
-	set hatter, 1;
-	mes "[Hat Craft Tutor]";
-    mes "Congratulations! You have crafted the Mr. Smiley mask.";
-	next;
-	mes "[Hat Craft Tutor]";
-    mes "This mask gives you +10 HP as an additional bonus.";
-	next;
-	mes "[Hat Craft Tutor]";
-	mes "Move along to the other instructors, you have much to learn!";
-	close;
-    // Update the tutorial and hatter variables
-
-	close;
-
-	}else{
-		mes "[Hat Craft Tutor]";
-    	mes "Check your weight before accepting the reward.";
-
-	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -395,13 +398,7 @@ new_1-2,99,112,6	script	HatTutor	4_M_MANAGER,{
 
 new_1-2,84,114,6	script	RefineTutor	1_M_SMITH,{
 
-    // Check if the player has completed the previous tutors
-    if (tutorial != 3) {
 
-		mes "[Hat Craft Tutor]";
-		mes "You lost or something, I can't help you kid.";
-		close;
-    }
 
 	if(refiner_t == 2)
 	{
@@ -409,6 +406,8 @@ new_1-2,84,114,6	script	RefineTutor	1_M_SMITH,{
     			mes "Go out there and do us proud.";
 				close;	
 	}
+	// Check if the player has completed the previous tutors
+
 	if(refiner_t == 1)
 	{
 		
@@ -426,61 +425,88 @@ new_1-2,84,114,6	script	RefineTutor	1_M_SMITH,{
 
 
 			} else {
+
 				mes "[Refine Tutor]";
     			mes "Come back to me after you have refined a weapon.";
 				close;
 
-
 			}
 
 		} else {
+
 			mes "[Refine Tutor]";
     		mes "Make sure to equip the weapon before showing me.";
 			close;
 
-
 		}	
 	}
+	    if (tutorial == 4) {
 
-	mes "[Refine Tutor]";
-    mes "Welcome to your instruction on refinement.";
-	next;
-	mes "[Refine Tutor]";
-    mes "Here I'll teach you about gear refinement.";
-	next;
-	mes "[Refine Tutor]";
-    mes "Refining your gear is very important, sometimes it can even be the meaning between life and death.";
-	next;
-	mes "[Refine Tutor]";
-    mes "Weapons have 4 grades that are known as levels, each level takes different material.";
-	next;
-	mes "[Refine Tutor]";
-    mes "Armor is in a class of its own but only has one kind of material to upgarde";
-	next;
-	mes "[Refine Tutor]";
-    mes "Take your dagger for instance, why not try refining it.  Here take some Phracon why not try to see if you can refine it?";
-	next;
-	if(checkweight(2278,1))
-	{
-		mes "[Refine Tutor]";
- 	 	mes "You can find a smithy in the room to our left.";		
-		getitem 1010, 3;
-		set refiner_t,1;
+		mes "[Hat Craft Tutor]";
+		mes "You lost or something, I can't help you kid.";
 		close;
+    	} else {
+			mes "[Refine Tutor]";
+			mes "Welcome to your instruction on refinement.";
+			next;
+			mes "[Refine Tutor]";
+			mes "Here I'll teach you about gear refinement.";
+			next;
+			mes "[Refine Tutor]";
+			mes "Refining your gear is very important, sometimes it can even be the meaning between life and death.";
+			next;
+			mes "[Refine Tutor]";
+			mes "Weapons have 4 grades that are known as levels, each level takes different material.";
+			next;
+			mes "[Refine Tutor]";
+			mes "Armor is in a class of its own but only has one kind of material to upgarde";
+			next;
+			mes "[Refine Tutor]";
+			mes "Take your dagger for instance, why not try refining it.  Here take some Phracon why not try to see if you can refine it?";
+			next;
+			if(checkweight(2278,1))
+				{
+					mes "[Refine Tutor]";
+					mes "You can find a smithy in the room to our left.";		
+					getitem 1010, 3;
+					set refiner_t,1;
+					close;
+				}
 	}
-	
 }
 ////////////////////////////////////////////////////////////////////////
 // Academy HeadMaster
 ////////////////////////////////////////////////////////////////////////
 new_1-2,99,101,4	script	Academy headmaster	1_M_JOBTESTER,{
 
-    if (tutorial != 3) {
 
-		mes "[Hat Craft Tutor]";
-		mes "...";
+    if (tutorial == 5) {
+
+		mes "[Headmaster]";
+		mes "What are you standing around for? Go and find yourself a master in the other room.";
 		close;
+
 	}
+
+
+    if (tutorial == 4) {
+
+		if(refinter_t == 2 && carded == 2 && hat_t == 2)
+		{
+			mes "[Headmaster]";
+			mes "Congratulations, I think you are ready to move on to find a master, please make your way to the other room.";
+			set tutorial, 5;
+			close;
+		} else {
+			mes "[Headmaster]";
+			mes "Have you done what I asked yet?";
+			close;
+
+		}
+
+
+
+	} else {
 
 	mes "[Headmaster]";
 	mes "Welcome we have been awaiting your arrival, I hope the sea was in your favor.";
@@ -502,31 +528,88 @@ new_1-2,99,101,4	script	Academy headmaster	1_M_JOBTESTER,{
 	next;
 	mes "[Headmaster]";
 	mes "With that said, please visit the three instructos behind me and come back once you are finished.";
+	set tutorial, 4;
 	close;
+	}
 }
 
 
 ////////////////////////////////////////////////////////////////////////
 // Swordsmen Master
 ////////////////////////////////////////////////////////////////////////
+new_1-2,161,182,5	script	Swordsmen Master	2_M_SWORDMASTER,{
+
+	mes "[Swordsmen Master]";
+	mes "You are not ready for this.";
+	close;
+
+}
+
 ////////////////////////////////////////////////////////////////////////
 // Archer Master
 ////////////////////////////////////////////////////////////////////////
+new_1-2,182,182,3	script	Archer Master	1_F_GYPSY,{
+
+	mes "[Archer Master]";
+	mes "You don't seem very sharp...";
+	close;
+
+}
 ////////////////////////////////////////////////////////////////////////
 // Magician Master
 ////////////////////////////////////////////////////////////////////////
+new_1-2,183,172,2	script	Mage Master	1_M_WIZARD,{
+
+	mes "[Mage Master]";
+	mes "Sorry, I think you have the wrong person.";
+	close;
+
+}
+
 ////////////////////////////////////////////////////////////////////////
 // Acolyte Master
 ////////////////////////////////////////////////////////////////////////
+new_1-2,182,162,5	script	Acolyte Master	4_M_OLDFRIAR,{
+
+	mes "[Acolyte Master]";
+	mes "Have you seen my assistant around?";
+	close;
+
+}
+
 ////////////////////////////////////////////////////////////////////////
 // Merchant Master
 ////////////////////////////////////////////////////////////////////////
+new_1-2,160,162,7	script	Merchant Master	4_M_ALCHE_E,{
+
+	mes "[Merchant Master]";
+	mes "Scram, I have important ventures to consider right now.";
+	close;
+
+}
+
 ////////////////////////////////////////////////////////////////////////
 // Strange Old Man
 ////////////////////////////////////////////////////////////////////////
+new_1-2,171,187,4	script	Strange old Man	4_M_JPNOJI,{
+
+	mes "[Strange Old Man]";
+	mes "I've seen my share of adventures young one, there are more arts to explore than just these numbskulls.";
+	close;
+
+}
 ////////////////////////////////////////////////////////////////////////
 // Veteran Novice
 ////////////////////////////////////////////////////////////////////////
+
+new_1-1,145,99,2	script	Veteran Novice	4_M_SIT_NOVICE,{
+
+	mes "[Veteran Novice]";
+	mes "Isn't today just lovely?";
+	close;
+
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 // Misc Code for the Academy
@@ -537,7 +620,7 @@ new_1-2,99,101,4	script	Academy headmaster	1_M_JOBTESTER,{
 //Monster spawns
 //porings
 new_1-1,60,144,10,10	monster	Poring	1002,9,30000,30000
-new_1-3,0,0,0,0	monster	Poring	1002,40,30000,30000
+new_1-3,0,0,0,0	monster	Poring	1002,20,30000,30000
 //roda frogs
 new_1-3,132,72,10,0	monster	--en--	1012,4,60000,60000
 new_1-3,69,80,10,0	monster	--en--	1012,4,60000,60000
@@ -560,9 +643,20 @@ new_1-3,116,134,6,6	monster	--en--	1007,2,60000,60000
 new_1-3,80,41,6,6	monster	--en--	1007,2,60000,60000
 
 //Spore
-new_1-3,0,0,0,0	monster	--en--	1014,9,30000,30000
+new_1-3,0,0,0,0	monster	--en--	1014,4,30000,30000
 //Snake
-new_1-3,0,0,0,0	monster	--en--	1025,9,30000,30000
+new_1-3,0,0,0,0	monster	--en--	1025,3,30000,30000
+
+//lunatic
+new_1-3,0,0,0,0	monster	--en--	1063,15,30000,30000
+//willows
+new_1-3,0,0,0,0	monster	--en--	1010,10,30000,30000
+
+//rocker
+new_1-3,0,0,0,0	monster	--en--	1052,4,30000,30000
+//wolves
+new_1-3,0,0,0,0	monster	--en--	1013,3,30000,30000
+
 
 
 new_1-2,38,183,3	trader	WeaponDealer	1_M_03,{
@@ -586,6 +680,10 @@ OnInit:
 
 new_1-2,17,182,6	script	Refiner	4_M_ORIENT01,{
 	callfunc "refinemain","Antonio",0;
+	end;
+}
+new_1-2,16,177,6	script	MaterialHandler	4_M_04,{
+	callfunc "phramain","Vurewell";
 	end;
 }
 
@@ -615,13 +713,33 @@ new_1-2,41,166,3	script	Kafra Employee::kaf_novice	4_F_KAFRA3,{
 
 
 //First door into the academy
-new_1-2,100,31,4	warp	n1	0,0,new_1-2,100,70
-new_1-2,99,68,4	warp	n2	0,0,new_1-2,100,27
+new_1-2,100,31,4	warp	n1	1,1,new_1-2,100,70
+new_1-2,99,68,4	warp	n2	1,1,new_1-2,100,27
 
 //outside of academy to hunting grounds
-new_1-2,23,191,4	warp	n3	0,0,new_1-3,96,21
-new_1-3,96,18,4	warp	n4	0,0,new_1-2,23,188
+new_1-2,23,191,0	warp	n3	1,1,new_1-3,96,21
+new_1-3,96,18,0	warp	n4	1,1,new_1-2,23,188
 
 //Hunting grounds to the graduation room
-new_1-3,96,176,4	warp	n5	0,0,new_1-4,99,12
-new_1-4,99,8,4	warp	n6	0,0,new_1-3,96,173
+new_1-3,96,176,4	warp	n5	1,1,new_1-4,99,12
+new_1-4,99,8,4	warp	n6	1,1,new_1-3,96,173
+
+
+
+-	script	killcounttest	-1,{
+	
+	OnNPCKillEvent:
+
+		//only tally actual nations
+		if(nation > 0){
+			//.@n = getvariableofpc(nation, getcharid(CHAR_ID_ACCOUNT, "player"));
+			$nation_CQP[nation] ++;
+			my_CQP ++;
+			dispbottom("nation #: '" + nation + "'" + " kills " + $nation_CQP[nation] + "'");
+		}
+
+		
+
+
+
+	}
